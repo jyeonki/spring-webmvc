@@ -9,8 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ShowController implements ControllerV4 {
-    private final MemberRepository repository
-                    = MemoryMemberRepo.getInstance();
+    private final MemberRepository repository = MemoryMemberRepo.getInstance();
 
     @Override
     public String process(Map<String, String> paramMap, Model model) {

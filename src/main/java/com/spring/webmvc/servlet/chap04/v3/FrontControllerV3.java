@@ -22,8 +22,7 @@ import java.util.Map;
 public class FrontControllerV3 extends HttpServlet {
 
 
-    private final Map<String, ControllerV3> controllerMap
-                                            = new HashMap<>();
+    private final Map<String, ControllerV3> controllerMap = new HashMap<>();
 
     public FrontControllerV3() {
         controllerMap.put("/mvc/v3/join", new FormController());
@@ -34,9 +33,7 @@ public class FrontControllerV3 extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
-
-        // 현재 들어온 요청 URI를 반환
+        // 현재 들어온 요청 URI 반환
         String uri = req.getRequestURI();
 
         // 컨트롤러맵에서 방금 들어온 요청에 따른 적합한 컨트롤러를 꺼내옴
@@ -53,16 +50,17 @@ public class FrontControllerV3 extends HttpServlet {
 
         ModelAndView mv = controller.process(paramMap);
 
-        // 모델데이터를 jsp로 전송
+        // 모델데이터를 jsp 로 전송
         modelToView(req, mv);
 
         // 화면 렌더링
         mv.render(req, resp);
-
     }
 
     private void modelToView(HttpServletRequest req, ModelAndView mv) {
         Map<String, Object> model = mv.getModel();
+        System.out.println("model = " + model);
+
         for (String key : model.keySet()) {
             req.setAttribute(key, model.get(key));
         }

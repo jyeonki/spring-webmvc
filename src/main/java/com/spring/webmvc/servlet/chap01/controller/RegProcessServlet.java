@@ -17,18 +17,19 @@ public class RegProcessServlet extends HttpServlet {
 
     private MemberRepository repository = MemoryMemberRepo.getInstance();
 
+    // 핵심 비즈니스 로직
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //1. 회원가입 폼에서 날아온 회원 데이터 가져오기
+        // 1. 회원가입 폼에서 날아온 회원 데이터 가져오기
         String account = req.getParameter("account");
         String password = req.getParameter("password");
         String userName = req.getParameter("userName");
 
-        //2. 회원 정보를 적절한 저장소에 저장
+        // 2. 회원 정보를 적절한 저장소에 저장
         Member member = new Member(account, password, userName);
         repository.save(member);
 
-        //3. 홈 화면으로 이동 (리다이렉션)
+        // 3. 홈 화면으로 이동 (redirection)
         resp.sendRedirect("/");
     }
 }

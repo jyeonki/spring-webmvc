@@ -50,7 +50,6 @@
                 취미가 없습니다~~~
             </c:otherwise>
         </c:choose>
-        
 
 
     </p>

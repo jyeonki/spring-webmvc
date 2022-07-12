@@ -14,21 +14,20 @@ import java.io.IOException;
 @WebServlet("/mvc/save")
 public class SaveServlet extends HttpServlet {
 
-    private final MemberRepository repository
-            = MemoryMemberRepo.getInstance();
+    private final MemberRepository repository = MemoryMemberRepo.getInstance();
 
-    @Override // proteted나 public은 가능 (오버라이딩 룰)
+    @Override // protected or public 가능 (오버라이딩 룰)
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //1. 회원가입 폼에서 날아온 회원 데이터 가져오기
+        // 1. 회원가입 폼에서 날아온 회원 데이터 가져오기
         String account = request.getParameter("account");
         String password = request.getParameter("password");
         String userName = request.getParameter("userName");
 
-        //2. 회원 정보를 적절한 저장소에 저장
+        // 2. 회원 정보를 적절한 저장소에 저장
         Member member = new Member(account, password, userName);
         repository.save(member);
 
-        //3. 홈 화면으로 이동 (리다이렉션)
+        // 3. 홈 화면으로 이동 (redirection)
         response.sendRedirect("/");
     }
 }

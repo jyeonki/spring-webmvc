@@ -29,6 +29,7 @@ public class MemberController {
     @RequestMapping("/save")
     public String save(Member member) {
         repository.save(member);
+
         return "redirect:/";
     }
     // 회원 목록 조회 요청
@@ -36,6 +37,7 @@ public class MemberController {
     public String show(Model model) {
         List<Member> members = repository.findAll();
         model.addAttribute("mList", members);
+
         return "members";
     }
 

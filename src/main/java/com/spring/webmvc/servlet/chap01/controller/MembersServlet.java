@@ -37,7 +37,7 @@ public class MembersServlet extends HttpServlet {
         w.write("</head>\n");
         w.write("<body>\n");
 
-        // 회원 한명 정보당 li태그 하나씩 만들것임
+        // 회원 한명 정보당 li 태그 하나씩 만들 것임
         w.write("<ul>\n");
 
         // 회원 목록을 저장소로부터 받아와야 함.
@@ -47,17 +47,13 @@ public class MembersServlet extends HttpServlet {
 
         for (Member member : memberList) {
             w.write("<li>\n");
-            w.write(String.format("# 회원번호: %s, 아이디: %s, 이름: %s"
-                    , member.getUserNum(), member.getAccount(),
-                    member.getUserName()));
+            w.write(String.format("# 회원번호: %s, 아이디: %s, 이름: %s", member.getUserNum(), member.getAccount(), member.getUserName()));
             w.write("</li>\n");
         }
 
         w.write("</ul>\n");
 
-
         w.write("</body>\n");
         w.write("</html>\n");
-
     }
 }

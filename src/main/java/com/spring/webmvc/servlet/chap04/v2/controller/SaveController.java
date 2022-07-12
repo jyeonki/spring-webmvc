@@ -12,11 +12,11 @@ import java.io.IOException;
 
 public class SaveController implements ControllerV2 {
 
-    private final MemberRepository repository
-            = MemoryMemberRepo.getInstance();
+    private final MemberRepository repository = MemoryMemberRepo.getInstance();
 
     @Override
     public View process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String account = request.getParameter("account");
         String password = request.getParameter("password");
         String userName = request.getParameter("userName");

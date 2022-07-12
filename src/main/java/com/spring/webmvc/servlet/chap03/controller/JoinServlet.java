@@ -18,8 +18,7 @@ public class JoinServlet extends HttpServlet {
         // 물리적 경로
         String viewName = "/WEB-INF/views/reg_form.jsp";
 
-        RequestDispatcher dp
-                = req.getRequestDispatcher(viewName);
+        RequestDispatcher dp = req.getRequestDispatcher(viewName);
         dp.forward(req, resp);
     }
 }

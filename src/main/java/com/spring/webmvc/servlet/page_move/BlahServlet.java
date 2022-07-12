@@ -15,8 +15,7 @@ public class BlahServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-//        resp.sendRedirect("/WEB-INF/blah.jsp");
+        // resp.sendRedirect("WEB-INF/blah.jsp"); // WEB-INF는 클라이언트에서 접근 안됨, URL 노출 됨
 
         // 모델에 데이터 담기
         req.setAttribute("msg", "안뇽하세요~");
@@ -25,8 +24,8 @@ public class BlahServlet extends HttpServlet {
         req.setAttribute("hobbies", new ArrayList<>());
 
 
-        RequestDispatcher dp
-                = req.getRequestDispatcher("/WEB-INF/blah.jsp");
+        RequestDispatcher dp = req.getRequestDispatcher("/WEB-INF/blah.jsp");
+        // WEB-INF 접근 됨, URL 노출 안됨
         dp.forward(req, resp);
     }
 }

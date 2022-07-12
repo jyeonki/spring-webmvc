@@ -1,9 +1,8 @@
 package com.spring.webmvc.servlet.chap01;
 
 /*
-    # 서블릿: http 요청과 응답 데이터를 쉽게 처리할
-            수 있도록 도와주는 자바의 API
- */
+    # 서블릿: http 요청과 응답 데이터를 쉽게 처리할 수 있도록 도와주는 자바의 API
+*/
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,15 +15,13 @@ import java.io.PrintWriter;
 @WebServlet("/info")
 public class InfoServlet extends HttpServlet {
 
-
-
     public InfoServlet() {
         System.out.println("\n\n\n\nInfoServlet constructor call!\n\n\n\n");
     }
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("info 요청이 들어옴!!");
+        System.out.println("info request!!!!");
 
 //        System.out.println("connected IP address: " + req.getRemoteAddr());
 //        System.out.println("hobby: " + req.getParameter("hobby"));
@@ -40,6 +37,7 @@ public class InfoServlet extends HttpServlet {
 
         PrintWriter w = resp.getWriter();
 
+        // inconvenient
         w.write("<html>");
         w.write("<body>");
         double bmi = calcBMI(height, weight);
@@ -55,7 +53,6 @@ public class InfoServlet extends HttpServlet {
 
         w.write("</body>");
         w.write("</html>");
-
     }
 
     @Override

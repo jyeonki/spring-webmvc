@@ -13,8 +13,7 @@ public class FormController implements ControllerV1 {
         // 물리적 경로
         String viewName = "/WEB-INF/views/reg_form.jsp";
 
-        RequestDispatcher dp
-                = request.getRequestDispatcher(viewName);
+        RequestDispatcher dp = request.getRequestDispatcher(viewName);
         dp.forward(request, response);
     }
 }

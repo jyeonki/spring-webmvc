@@ -24,9 +24,8 @@ public class FrontControllerV1 extends HttpServlet {
         /mvc/v1/show - 회원 목록 조회 요청 -> ShowController 연결
      */
 
-    // 해시맵 사용 : 하위 컨트롤러들을 저장, 키값은 URL
-    private final Map<String, ControllerV1> controllerMap
-                                            = new HashMap<>();
+    // HashMap 사용 : 하위 컨트롤러들을 저장, 키값은 URL
+    private final Map<String, ControllerV1> controllerMap = new HashMap<>();
 
     public FrontControllerV1() {
         controllerMap.put("/mvc/v1/join", new FormController());
@@ -37,7 +36,7 @@ public class FrontControllerV1 extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        // 현재 들어온 요청 URI를 반환
+        // 현재 들어온 요청 URI 반환
         String uri = req.getRequestURI();
         System.out.println("front-controller 요청이 들어옴~~~: " + uri);
 
@@ -50,6 +49,5 @@ public class FrontControllerV1 extends HttpServlet {
         }
 
         controller.process(req, resp);
-
     }
 }

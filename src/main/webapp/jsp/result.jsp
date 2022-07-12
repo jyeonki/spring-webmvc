@@ -11,6 +11,7 @@
 <body>
 
     <h1>페이지가 result.jsp로 강제이동 되었습니다~~</h1>
+
     <% String food = request.getParameter("food"); %>
 
     <h2># 음식명: <%= food %> </h2>

@@ -27,23 +27,21 @@ public class RegisterServlet extends HttpServlet {
         w.write("<html lang='ko'>\n");
         w.write("<head>\n");
 //        w.write("<meta charset='EUC-KR'>\n");
+        w.write("<meta charset='utf-8'>\n");
         w.write("<title>회원가입 양식</title>\n");
         w.write("<style>label { display: block; }</style>\n");
 
         w.write("</head>\n");
         w.write("<body>\n");
         w.write("<form action='/reg-process' method='post'>\n");
-        w.write("<label># account: <input type='text' name='account'></label>\n");
-        w.write("<label># password: <input type='password' name='password'></label>\n");
-        w.write("<label># username: <input type='text' name='userName'></label>\n");
-        w.write("<label><button type='submit'>register</button></label>\n");
-
-
+        w.write("<label># Account: <input type='text' name='account'></label>\n");
+        w.write("<label># Password: <input type='password' name='password'></label>\n");
+        w.write("<label># Username: <input type='text' name='userName'></label>\n");
+        w.write("<label><button type='submit'>Register</button></label>\n");
 
         w.write("</form>\n");
 
         w.write("</body>\n");
         w.write("</html>\n");
-
     }
 }

@@ -14,11 +14,14 @@ import java.io.IOException;
 public class View {
 
     private String viewName; // 포워딩할 뷰의 경로
-    private String prefix; // 접두사 (ex: /WEB-INF/views/  )
-    private String suffix; // 접미사 (ex:  .jsp  )
-    private boolean redirect; // 리다이렉트인지 확인
+    private String prefix; // 접두사 (ex: /WEB-INF/views/)
+    private String suffix; // 접미사 (ex:  .jsp)
+    private boolean redirect;  // true : redirect / false : forward
 
     public View(String viewName) {
+
+        // System.out.println("viewName = " + viewName);
+
         this.prefix = "/WEB-INF/views/";
         this.suffix = ".jsp";
         if (!isRedirect(viewName)) {
@@ -31,6 +34,8 @@ public class View {
 
     //포워딩 기능
     public void render(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // System.out.println("this.viewName = " + this.viewName);
+
         if (!this.redirect) {
             RequestDispatcher dp = request.getRequestDispatcher(viewName);
             dp.forward(request, response);

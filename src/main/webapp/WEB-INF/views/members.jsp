@@ -17,7 +17,7 @@
 
     <ul>
 
-        <h1>MVC버전 목록보기</h1>
+        <h1>MVC 버전 목록보기</h1>
 
         <c:forEach var="m" items="${mList}">
             <li>
@@ -39,12 +39,17 @@
     <script>
 
         const $rmBtn = document.querySelector('#rm-btn');
+
         $rmBtn.addEventListener('click', e => {
-            if (!confirm('진짜루 삭제???')) {
+            if (!confirm('정말 삭제하시겠습니까?')) {
                 e.preventDefault(); // 링크 이동 중지
                 // 삭제 취소
                 return;
             }
+
+            // const userNum = '${m.userNum}';
+
+            // location.href = '/mvc/v4/remove?userNum=' + userNum;
         });
 
     </script>
