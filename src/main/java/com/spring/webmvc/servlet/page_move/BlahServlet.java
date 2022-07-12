@@ -21,8 +21,8 @@ public class BlahServlet extends HttpServlet {
         // 모델에 데이터 담기
         req.setAttribute("msg", "안뇽하세요~");
         req.setAttribute("number", 200);
-//        req.setAttribute("hobbys", Arrays.asList("수영", "독서", "수면"));
-        req.setAttribute("hobbys", new ArrayList<>());
+//        req.setAttribute("hobbies", Arrays.asList("수영", "독서", "수면"));
+        req.setAttribute("hobbies", new ArrayList<>());
 
 
         RequestDispatcher dp

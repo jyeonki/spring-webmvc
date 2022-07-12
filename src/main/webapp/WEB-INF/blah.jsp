@@ -17,13 +17,13 @@
         <br>
         서버에서 온 숫자: ${number * 3} 
         <br>
-        서버에서 온 리스트: ${hobbys}
+        서버에서 온 리스트: ${hobbies}
         <br>
 
         <!-- jstl을 이용한 반복문 -->
         
         <!-- iteration -->
-        <c:forEach var="h" items="${hobbys}">
+        <c:forEach var="h" items="${hobbies}">
             # 취미 : ${h} <br>
         </c:forEach>
 
@@ -42,7 +42,7 @@
         <br>
         <!-- 다중 if문 -->
         <c:choose>
-            <c:when test="${hobbys.size() > 0}">
+            <c:when test="${hobbies.size() > 0}">
                 취미가 있습니다~~~
             </c:when>            
 
