@@ -8,14 +8,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Repository // @Component와 같은 개념
+// @Repository // @Component와 같은 개념
+// spring jdbc 라이브러리 추가때문에 주석처리
 public class MemoryMemberRepo implements MemberRepository {
 
     // 회원 정보를 저장할 메모리 저장소
     private Map<Integer, Member> memberMap = new HashMap<>();
 
     // 싱글톤 패턴 구현
-    // 1. 생성자를 단 하나 선언하고 외부에서 객체 만들 수 없게 private으로 제한
+    // 1. 생성자를 단 하나 선언하고 외부에서 객체 만들 수 없게 private 으로 제한
     private MemoryMemberRepo() {}
 
     // 2. 스스로의 객체를 단 하나 생성한다.

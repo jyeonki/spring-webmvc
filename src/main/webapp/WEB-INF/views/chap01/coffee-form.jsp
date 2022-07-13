@@ -84,6 +84,9 @@
             
 
             const $sel = document.getElementById('menu-sel');
+
+            // 자바스크립트 onchange 용도는 select 박스의 값이 변경될때 자주 사용된다.
+            // select 박스의 값이 변경될때 onchange() 이벤트에서 사용자가 지정한 함수를 호출하여 각각의 동작(스크립트)을 실행시킨다
             $sel.onchange = e => {
                 console.log(e.target.value);
                 const price = coffeePriceList[e.target.value]; 

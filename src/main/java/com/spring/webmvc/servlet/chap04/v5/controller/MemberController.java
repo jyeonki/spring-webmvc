@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @RequestMapping("/mvc/v5/*")
-@Controller
+// @Controller
+// spring jdbc 라이브러리 추가때문에 주석처리
 public class MemberController {
 
     private final MemberRepository repository;
 
-    @Autowired
+    // @Autowired
+    // spring jdbc 라이브러리 추가때문에 주석처리
     public MemberController(MemberRepository repository) {
         this.repository = repository;
     }
