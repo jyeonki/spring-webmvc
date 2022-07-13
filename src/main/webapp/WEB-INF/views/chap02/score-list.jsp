@@ -102,6 +102,7 @@
                     </li>
                 </c:forEach>
             </ul>
+            <input type='button' id='btnSort' value='test'></input>
         </section>
 
 
@@ -110,6 +111,7 @@
 
     <script>
         const $ul = document.querySelector('.score-list');
+        const $btnSort = document.querySelector('#btnSort');
 
         $ul.addEventListener('click', e => {
             if (!e.target.matches('a.del-btn')) return;
@@ -125,6 +127,10 @@
                 return;
             }
 
+        });
+
+        $btnSort.addEventListener('click', e => {
+            location.href = '/score/list/sorting?sortingType=KOR';
         });
 
         // 홈화면으로 버튼 이벤트

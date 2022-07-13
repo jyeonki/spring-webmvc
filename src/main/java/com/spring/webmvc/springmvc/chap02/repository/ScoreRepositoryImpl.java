@@ -2,6 +2,7 @@ package com.spring.webmvc.springmvc.chap02.repository;
 
 import com.spring.webmvc.springmvc.chap02.domain.Score;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @Repository // @Component 개념
 @RequiredArgsConstructor // final 필드를 초기화해주는 생성자 선언 (lombok)
+@Log4j2
 public class ScoreRepositoryImpl implements ScoreRepository {
 
     // 스프링 JDBC - JDBC Template : JDBC 단순화
@@ -33,9 +35,36 @@ public class ScoreRepositoryImpl implements ScoreRepository {
         // 한 행을 삽입하는 거니까 == 1
     }
 
-    @Override
-    public List<Score> findAll() {
+    /*public List<Score> findAll() {
         String sql = "SELECT * FROM tbl_score";
+
+        // SELECT문의 경우는 query()
+//        return template.query(sql, new ScoreRowMapper());
+
+        *//*
+        return template.query(sql, new RowMapper<Score>() {
+            @Override
+            public Score mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return new Score(rs);
+            }
+        });
+         *//*
+        return template.query(sql, (rs, rowNum) -> new Score(rs));
+    }*/
+    @Override
+    public List<Score> findAll(String sortingType) {
+
+        log.info("ScoreRepositoryImpl.sortingType: '" + sortingType + "'");
+
+        String orderBy = "";
+        if("KOR".equals(sortingType)) {
+            orderBy = " ORDER BY KOR";
+        } else {
+            orderBy = " ORDER BY stu_num";
+        }
+
+        String sql = "SELECT * FROM tbl_score" + orderBy;
+        log.info("ScoreRepositoryImpl.sql: " + sql);
 
         // SELECT문의 경우는 query()
 //        return template.query(sql, new ScoreRowMapper());

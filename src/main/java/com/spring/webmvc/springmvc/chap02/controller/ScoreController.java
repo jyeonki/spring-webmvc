@@ -7,6 +7,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -18,12 +19,34 @@ public class ScoreController {
     private final ScoreRepository repository;
 
     // 점수 등록 및 조회 화면 열기 요청
+    /*@RequestMapping("/score/list")
+    public String list(Model model) {
+        log.info("/score/list GET Request!!");
+
+        // jsp에게 점수 정보 리스트를 전달해야 함
+        List<Score> scoreList = repository.findAll();
+        model.addAttribute("scores", scoreList);
+
+        return "chap02/score-list";
+    }*/
     @RequestMapping("/score/list")
     public String list(Model model) {
         log.info("/score/list GET Request!!");
+        log.info("model: " + model.toString());
         
         // jsp에게 점수 정보 리스트를 전달해야 함
-        List<Score> scoreList = repository.findAll();
+        List<Score> scoreList = repository.findAll("");
+        model.addAttribute("scores", scoreList);
+
+        return "chap02/score-list";
+    }
+
+    @RequestMapping("/score/list/sorting")
+    public String sorting(Model model, @RequestParam("sortingType") String sortingType) {
+
+        log.info("sortingType: " + sortingType);
+
+        List<Score> scoreList = repository.findAll(sortingType);
         model.addAttribute("scores", scoreList);
 
         return "chap02/score-list";
