@@ -54,13 +54,37 @@ public class ScoreRepositoryImpl implements ScoreRepository {
     @Override
     public List<Score> findAll(String sortingType) {
 
+        /*StringBuilder sql = new StringBuilder("SELECT * FROM tbl_score");
+
+        switch (sortingType) {
+            case "num":
+                sql.append(" ORDER BY stu_num");
+                break;
+            case "name":
+                sql.append(" ORDER BY stu_name");
+                break;
+            case "average":
+                sql.append(" ORDER BY average DESC");
+                break;
+        }*/
+
         log.info("ScoreRepositoryImpl.sortingType: '" + sortingType + "'");
 
         String orderBy = "";
-        if("KOR".equals(sortingType)) {
-            orderBy = " ORDER BY KOR";
-        } else {
+        if ("stu_num".equals(sortingType)) {
             orderBy = " ORDER BY stu_num";
+        } else if ("stu_name".equals(sortingType)) {
+            orderBy = " ORDER BY stu_name";
+        } else if ("KOR".equals(sortingType)) {
+            orderBy = " ORDER BY KOR";
+        } else if ("eng".equals(sortingType)) {
+            orderBy = " ORDER BY eng";
+        } else if ("math".equals(sortingType)) {
+            orderBy = " ORDER BY math";
+        } else if ("total".equals(sortingType)) {
+            orderBy = " ORDER BY total";
+        } else {
+            orderBy = " ORDER BY average";
         }
 
         String sql = "SELECT * FROM tbl_score" + orderBy;

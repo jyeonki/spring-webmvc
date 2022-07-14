@@ -58,6 +58,21 @@
             padding: 200px 50px 100px;
             font-size: 1.5em;
         }
+
+        .list-header {
+            display: flex;
+            justify-content: space-between;
+
+            width: 50%;
+        }
+        .list-header .sort-link-group {
+            display: flex;
+
+        }
+        .list-header .sort-link-group div {
+            margin-right: 20px;
+        }
+
     </style>
 </head>
 
@@ -90,7 +105,28 @@
             <hr>
 
             <ul class="score-list">
-                <li>총 학생 수: ${scores.size()}명</li>
+                <li>
+                    총 학생 수: ${scores.size()}명
+                    <select name="sort" id="sort">
+                        <optgroup label="sort">
+                            <option value="stu_num">학번</option>
+                            <option value="stu_name">이름</option>
+                            <option value="kor">국어</option>
+                            <option value="eng">영어</option>
+                            <option value="math">수학</option>
+                            <option value="total">총점</option>
+                            <option value="average">평균</option>
+                        </optgroup>
+                    </select>
+                </li>
+                <!-- <li class="list-header">
+                    <div class="count">총 학생 수: ${scores.size()}명</div>
+                    <div class="sort-link-group">
+                        <div><a href="/score/list?sort=num">학번순</a></div>
+                        <div><a href="/score/list?sort=name">이름순</a></div>
+                        <div><a href="/score/list?sort=average">평균순</a></div>
+                    </div>
+                </li> -->
 
                 <c:forEach var="s" items="${scores}">
                     <li>
@@ -111,7 +147,7 @@
 
     <script>
         const $ul = document.querySelector('.score-list');
-        const $btnSort = document.querySelector('#btnSort');
+        // const $btnSort = document.querySelector('#btnSort');
 
         $ul.addEventListener('click', e => {
             if (!e.target.matches('a.del-btn')) return;
@@ -129,14 +165,25 @@
 
         });
 
-        $btnSort.addEventListener('click', e => {
-            location.href = '/score/list/sorting?sortingType=KOR';
-        });
+        // $btnSort.addEventListener('click', e => {
+        //     location.href = '/score/list/sorting?sortingType=KOR';
+        // });
 
         // 홈화면으로 버튼 이벤트
         const $homeBtn = document.getElementById('go-home');
         $homeBtn.onclick = e => {
             location.href = '/';
+        };
+
+        const $sort = document.getElementById('sort');
+
+        // 자바스크립트 onchange 용도는 select 박스의 값이 변경될때 자주 사용된다.
+        // select 박스의 값이 변경될때 onchange() 이벤트에서 사용자가 지정한 함수를 호출하여 각각의 동작(스크립트)을 실행시킨다
+        $sort.onchange = e => {
+
+            location.href = '/score/list/sorting?sortingType=' + e.target.value;
+            
+            console.log(e.target.value);
         };
     </script>
 

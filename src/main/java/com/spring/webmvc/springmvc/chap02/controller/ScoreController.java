@@ -25,17 +25,27 @@ public class ScoreController {
 
         // jsp에게 점수 정보 리스트를 전달해야 함
         List<Score> scoreList = repository.findAll();
-        model.addAttribute("scores", scoreList);
 
+        // 이름 마킹 처리
+        for (Score s : scoreList) {
+            String original = s.getName();
+            StringBuilder markName = new StringBuilder(String.valueOf(original.charAt(0)));
+            for (int i = 0; i < original.length() - 1; i++) {
+                markName.append("*");
+            }
+            s.setName(markName.toString());
+        }
+
+        model.addAttribute("scores", scoreList);
         return "chap02/score-list";
     }*/
     @RequestMapping("/score/list")
-    public String list(Model model) {
+    public String list(Model model, @RequestParam(defaultValue = "stu_num")String sortingType) {
         log.info("/score/list GET Request!!");
         log.info("model: " + model.toString());
         
         // jsp에게 점수 정보 리스트를 전달해야 함
-        List<Score> scoreList = repository.findAll("");
+        List<Score> scoreList = repository.findAll(sortingType);
         model.addAttribute("scores", scoreList);
 
         return "chap02/score-list";
@@ -43,7 +53,7 @@ public class ScoreController {
 
     @RequestMapping("/score/list/sorting")
     public String sorting(Model model, @RequestParam("sortingType") String sortingType) {
-
+        // @RequestParam 생략가능 (변수이름과 같으면)
         log.info("sortingType: " + sortingType);
 
         List<Score> scoreList = repository.findAll(sortingType);
@@ -80,12 +90,34 @@ public class ScoreController {
         return "chap02/score-detail";
     }
 
+    // 개별 점수 조회 요청
+    /*@RequestMapping("/score/detail")
+    public ModelAndView detail(int stuNum) {
+        log.info("/score/detail GET - param1: {}", stuNum);
+        Score score = repository.findOne(stuNum);
+        ModelAndView mv = new ModelAndView("chap02/score-detail");
+        mv.addObject("s", score);
+
+        return mv;
+    }*/
+
+
+    // 점수 삭제 요청
     // 삭제 후 /score/list 페이지로 redirect
     @RequestMapping("/score/delete")
-    public String remove(Score score) {
+    public String delete(Score score) {
 
         log.info("/score/delete");
 
         return repository.remove(score.getStuNum()) ? "redirect:/score/list" : "redirect:/";
     }
+
+    // 점수 삭제 요청
+    /*@RequestMapping("/score/delete")
+    public String delete(@RequestParam("stuNum") int sn) {
+        log.info("/score/delete GET - param1: {}", sn); // sn이 {}안으로 들어간다
+
+        return repository.remove(sn) ? "redirect:/score/list" : "redirect:/";
+    }*/
+
 }
