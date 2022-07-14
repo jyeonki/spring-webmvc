@@ -1,14 +1,11 @@
-package com.spring.webmvc.springmvc.chap02.repository;
+package com.spring.webmvc.springmvc.chap02_1.repository;
 
-import com.spring.webmvc.springmvc.chap02.domain.Score;
+import com.spring.webmvc.springmvc.chap02_1.domain.Score;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 @Repository // @Component 개념
@@ -35,11 +32,28 @@ public class ScoreRepositoryImpl implements ScoreRepository {
         // 한 행을 삽입하는 거니까 == 1
     }
 
-    @Override
-    public List<Score> findAll(String sort) {
-        StringBuilder sql = new StringBuilder("SELECT * FROM tbl_score");
+    /*public List<Score> findAll() {
+        String sql = "SELECT * FROM tbl_score";
 
-        switch (sort) {
+        // SELECT문의 경우는 query()
+//        return template.query(sql, new ScoreRowMapper());
+
+        *//*
+        return template.query(sql, new RowMapper<Score>() {
+            @Override
+            public Score mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return new Score(rs);
+            }
+        });
+         *//*
+        return template.query(sql, (rs, rowNum) -> new Score(rs));
+    }*/
+    @Override
+    public List<Score> findAll(String sortingType) {
+
+        /*StringBuilder sql = new StringBuilder("SELECT * FROM tbl_score");
+
+        switch (sortingType) {
             case "num":
                 sql.append(" ORDER BY stu_num");
                 break;
@@ -49,7 +63,29 @@ public class ScoreRepositoryImpl implements ScoreRepository {
             case "average":
                 sql.append(" ORDER BY average DESC");
                 break;
+        }*/
+
+        log.info("ScoreRepositoryImpl.sortingType: '" + sortingType + "'");
+
+        String orderBy = "";
+        if ("stu_num".equals(sortingType)) {
+            orderBy = " ORDER BY stu_num";
+        } else if ("stu_name".equals(sortingType)) {
+            orderBy = " ORDER BY stu_name";
+        } else if ("KOR".equals(sortingType)) {
+            orderBy = " ORDER BY KOR";
+        } else if ("eng".equals(sortingType)) {
+            orderBy = " ORDER BY eng";
+        } else if ("math".equals(sortingType)) {
+            orderBy = " ORDER BY math";
+        } else if ("total".equals(sortingType)) {
+            orderBy = " ORDER BY total";
+        } else {
+            orderBy = " ORDER BY average";
         }
+
+        String sql = "SELECT * FROM tbl_score" + orderBy;
+        log.info("ScoreRepositoryImpl.sql: " + sql);
 
         // SELECT문의 경우는 query()
 //        return template.query(sql, new ScoreRowMapper());
@@ -62,7 +98,7 @@ public class ScoreRepositoryImpl implements ScoreRepository {
             }
         });
          */
-        return template.query(sql.toString(), (rs, rowNum) -> new Score(rs));
+        return template.query(sql, (rs, rowNum) -> new Score(rs));
     }
 
     @Override

@@ -1,6 +1,6 @@
-package com.spring.webmvc.springmvc.chap02.repository;
+package com.spring.webmvc.springmvc.chap02_1.repository;
 
-import com.spring.webmvc.springmvc.chap02.domain.Score;
+import com.spring.webmvc.springmvc.chap02_1.domain.Score;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public interface ScoreRepository {
 
     // 전체 점수 정보 조회
 //    List<Score> findAll();
-    List<Score> findAll(String sort);
+    List<Score> findAll(String sortingType);
 
     // 개별 점수 조회
     Score findOne(int stuNum);
