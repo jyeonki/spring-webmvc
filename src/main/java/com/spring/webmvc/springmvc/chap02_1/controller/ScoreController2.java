@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.List;
 @Controller
 @Log4j2
 @RequiredArgsConstructor
-public class ScoreController {
+public class ScoreController2 {
 
     private final ScoreRepository repository;
 
@@ -39,7 +38,7 @@ public class ScoreController {
         model.addAttribute("scores", scoreList);
         return "chap02/score-list";
     }*/
-    @RequestMapping("/score/list")
+//    @RequestMapping("/score/list") // chap03 ScoreControllerV2 때문에 주석처리
     public String list(Model model, @RequestParam(defaultValue = "stu_num")String sortingType) {
         log.info("/score/list GET Request!!");
         log.info("model: " + model.toString());
@@ -51,7 +50,7 @@ public class ScoreController {
         return "chap02/score-list";
     }
 
-    @RequestMapping("/score/list/sorting")
+//    @RequestMapping("/score/list/sorting")
     public String sorting(Model model, @RequestParam("sortingType") String sortingType) {
         // @RequestParam 생략가능 (변수이름과 같으면)
         log.info("sortingType: " + sortingType);
@@ -63,7 +62,7 @@ public class ScoreController {
     }
 
     // 점수 신규 등록 요청
-    @RequestMapping("/score/register")
+//    @RequestMapping("/score/register")
     public String register(Score score) {
         score.calcTotalAndAvg(); // calcTotalAndAvg(), private -> public 바꿔야 함
         score.calcGrade(); // calcGrade(), private -> public 바꿔야 함
@@ -79,7 +78,7 @@ public class ScoreController {
     }
 
     // 개별 점수 조회 요청
-    @RequestMapping("/score/detail")
+//    @RequestMapping("/score/detail")
     public String detail(int stuNum, Model model) {
 
         log.info("/score/detail");
@@ -104,7 +103,7 @@ public class ScoreController {
 
     // 점수 삭제 요청
     // 삭제 후 /score/list 페이지로 redirect
-    @RequestMapping("/score/delete")
+//    @RequestMapping("/score/delete")
     public String delete(Score score) {
 
         log.info("/score/delete");

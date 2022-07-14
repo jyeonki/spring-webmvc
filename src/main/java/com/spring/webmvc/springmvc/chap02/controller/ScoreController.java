@@ -20,7 +20,7 @@ public class ScoreController {
     private final ScoreRepository repository;
 
     // 점수 등록 및 조회 화면 열기 요청
-    @RequestMapping("/score/list")
+//    @RequestMapping("/score/list") // chap03 ScoreControllerV2 때문에 주석처리
     public String list(
             @RequestParam(defaultValue = "num") String sort
             , Model model) {
@@ -45,7 +45,7 @@ public class ScoreController {
     }
 
     // 점수 신규 등록 요청
-    @RequestMapping("/score/register")
+//    @RequestMapping("/score/register")
     public String register(Score score) {
         score.calcTotalAndAvg(); // calcTotalAndAvg(), private -> public 바꿔야 함
         score.calcGrade(); // calcGrade(), private -> public 바꿔야 함
@@ -61,7 +61,7 @@ public class ScoreController {
     }
 
     // 개별 점수 조회 요청
-    @RequestMapping("/score/detail")
+//    @RequestMapping("/score/detail")
     public ModelAndView detail(int stuNum) {
         log.info("/score/detail GET - param1: {}", stuNum);
         Score score = repository.findOne(stuNum);
@@ -72,7 +72,7 @@ public class ScoreController {
     }
 
     // 점수 삭제 요청
-    @RequestMapping("/score/delete")
+//    @RequestMapping("/score/delete")
     public String delete(@RequestParam("stuNum") int sn) {
         log.info("/score/delete GET - param1: {}", sn); // sn이 {}안으로 들어간다
 

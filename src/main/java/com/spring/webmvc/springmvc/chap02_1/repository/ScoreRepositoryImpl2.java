@@ -11,7 +11,7 @@ import java.util.List;
 @Repository // @Component 개념
 @RequiredArgsConstructor // final 필드를 초기화해주는 생성자 선언 (lombok)
 @Log4j2
-public class ScoreRepositoryImpl implements ScoreRepository {
+public class ScoreRepositoryImpl2 implements ScoreRepository {
 
     // 스프링 JDBC - JDBC Template : JDBC 단순화
     private final JdbcTemplate template;
