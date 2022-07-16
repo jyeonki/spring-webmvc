@@ -9,10 +9,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <style>
         a {
             text-decoration: none;
             color: inherit;
+        }
+
+        a.title-btn {
+            display: block;
         }
 
         .clearfix::after {
@@ -79,7 +85,7 @@
                     <tr class="tr">
                         <td>${b.boardNo}</td>
                         <td>${b.writer}</td>
-                        <td>${b.title}</td>
+                        <td><a class="title-btn" href="/board/content?boardNo=${b.boardNo}">${b.title}</a></td>
                         <td>${b.viewCount}</td>
                         <td>${b.regDate}</td>
                     </tr>
@@ -94,13 +100,11 @@
 
     <script>
 
-        const $tr = document.querySelector('.tr');
+        // $(".tr").click(function(e){
+            
+        //     location.href = '/board/content?boardNo=' + $(this).index();
 
-        $tr.addEventListener('click', e => {
-
-            location.href = '/board/content?boardNo=' + e.target.b;
-
-        });
+        // });
 
     </script>
 </body>

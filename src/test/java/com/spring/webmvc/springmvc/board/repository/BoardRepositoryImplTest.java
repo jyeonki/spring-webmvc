@@ -54,11 +54,11 @@ class BoardRepositoryImplTest {
     @DisplayName("해당 글번호에 맞는 글정보가 나타나야 한다.")
     void findOneTest() {
 
-        Board board = repository.findOne(3);
+        Board board = repository.findOne(2);
 
         System.out.println(board);
 
-        assertEquals("김코히", board.getWriter());
+        assertEquals("진간장", board.getWriter());
     }
 
     @Test

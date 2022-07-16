@@ -16,13 +16,13 @@ public class BoardRepositoryImpl implements BoardRepository {
 
     private final JdbcTemplate template;
 
-
     @Override
     public boolean save(Board board) {
-        String sql = "INSERT INTO board VALUES (seq_board.nextval, ?,?,?,0, TO_CHAR(sysdate,'yyyy-mm-dd'))";
+
+        String sql = "INSERT INTO board VALUES (seq_board.nextval, ?,?,?,?, sysdate)";
 
         // INSERT, UPDATE, DELETE : 템플릿의  update() 메서드 활용
-        return template.update(sql, board.getWriter(), board.getTitle(), board.getContent()) == 1;
+        return template.update(sql, board.getWriter(), board.getTitle(), board.getContent(), board.getViewCount()) == 1;
         // 한 행을 삽입하는 거니까 == 1
     }
 
@@ -32,7 +32,7 @@ public class BoardRepositoryImpl implements BoardRepository {
 //        String sql = "SELECT board_no, writer, title, view_cnt, reg_date FROM board";
 //        return template.query(sql, (rs, rowNum) -> new Board(rs));
 
-        StringBuilder sql = new StringBuilder("SELECT board_no, writer, title, view_cnt, reg_date FROM board");
+        StringBuilder sql = new StringBuilder("SELECT board_no, writer, title, content, view_cnt, reg_date FROM board");
 
         switch (sort) {
             case "no":
@@ -57,15 +57,25 @@ public class BoardRepositoryImpl implements BoardRepository {
     public boolean modify(Board board) {
 
         String sql = "UPDATE board SET writer=?, title=?, content=? WHERE board_no=?";
+//        String sql = "UPDATE board SET writer=1, title=1, content=1 WHERE board_no=3";
 
-        return template.update(sql, board.getWriter(), board.getTitle(), board.getContent()
-                , board.getBoardNo()) == 1;
+       return template.update(sql, board.getWriter(), board.getTitle(), board.getContent(), board.getBoardNo()) == 1;
     }
 
     @Override
     public boolean remove(int boardNo) {
+
         String sql = "DELETE FROM board WHERE board_no = ?";
 
         return template.update(sql, boardNo) == 1;
+    }
+
+    @Override
+    public int updateViewCount(int boardNo) {
+
+        String sql = "UPDATE board SET view_cnt = view_cnt + 1 WHERE board_no=?";
+
+//        return BoardRepository.updateViewCount(boardNo); // static 문제
+        return template.update(sql, boardNo);
     }
 }

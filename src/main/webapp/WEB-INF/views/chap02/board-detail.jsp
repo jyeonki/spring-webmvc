@@ -20,8 +20,9 @@
             margin-bottom: 15px;
         }
 
-        a.list,
-        a.delete {
+        a.modify-btn,
+        a.list-btn,
+        a.delete-btn {
             border: 1px solid #000;
         }
     </style>
@@ -29,35 +30,55 @@
 
 <body>
     <div class="board-content">
-        <form action="/board/modify" method="post">
-            <label>
-                작성자
-                <br>
-                <input type="text" name="writer">
-            </label>
-            <label>
-                글제목
-                <br>
-                <input type="text" name="title">
-            </label>
-            <label>
-                내용
-                <br>
-                <input type="text" name="content">
-            </label>
-            <label>
-                <button type="submit">수정</button>
-            </label>
-        </form>
+        <label>
+            작성자
+            <br>
+            <input type="text" name="writer" value="${b.writer}" disabled>
+        </label>
+        <label>
+            글제목
+            <br>
+            <input type="text" name="title" value="${b.title}" disabled>
+        </label>
+        <label>
+            내용
+            <br>
+            <input type="text" name="content" value="${b.content}" disabled>
+        </label>
+        <label>
+            <a class="modify-btn" href="/board/modify?boardNo=${b.boardNo}">수정</a>
+        </label>
         
         <label>
-            <a class="delete" href="/board/delete">삭제</a>
+            <a class="delete-btn" href="/board/delete?boardNo=${b.boardNo}">삭제</a>
         </label>
 
         <label>
-            <a class="list" href="/board/list">목록</a>
+            <a class="list-btn" href="/board/list">목록</a>
         </label>
     </div>
+
+    <script>
+
+        const $boardContent = document.querySelector('.board-content');
+
+        $boardContent.addEventListener('click', e => {
+            
+            if (!e.target.matches('a.delete-btn')) return;
+
+            e.preventDefault();
+            //console.log('클릭이벤트 발동!');
+
+            if (confirm('정말로 삭제하시겠습니까?')) {
+                // 삭제 진행
+                location.href = e.target.getAttribute('href');
+            } else {
+                // 삭제 취소
+                return;
+            }
+        });
+
+    </script>
 
 
 </body>
