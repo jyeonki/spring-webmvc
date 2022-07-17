@@ -30,8 +30,8 @@
 <body>
     <div class="board-content">
         <form action="/board/modify" method="POST">
-            <h1>${b.boardNo}번 게시물</h1>
-            <!--<input type="hidden" name="boardNo" value="${b.boardNo}">--> 
+            <!--<h1>${b.boardNo}번 게시물</h1>-->
+            <input type="hidden" name="boardNo" value="${b.boardNo}">
             
             <label>
                 작성자

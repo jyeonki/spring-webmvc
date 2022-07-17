@@ -42,7 +42,7 @@ public class BoardController {
         List<Board> boardList = repository.findAll(sort);
 
         model.addAttribute("boardList", boardList);
-        return "chap02/board-list";
+        return "board/board-list";
     }
 
     // 게시믈 상세 요청
@@ -54,7 +54,7 @@ public class BoardController {
         Board board = repository.findOne(boardNo);
         repository.updateViewCount(boardNo);
 
-        ModelAndView mv = new ModelAndView("chap02/board-detail");
+        ModelAndView mv = new ModelAndView("board/board-detail");
         mv.addObject("b", board);
 
         return mv;
@@ -66,7 +66,7 @@ public class BoardController {
 
         log.info("/board/write GET!!");
 
-        return "chap02/board-write";
+        return "board/board-write";
     }
 
     // 게시글 등록 요청
@@ -96,7 +96,7 @@ public class BoardController {
         Board board = repository.findOne(boardNo);
         model.addAttribute("b", board);
 
-        return "chap02/board-modify";
+        return "board/board-modify";
     }*/
 
     // 게시글 수정화면 요청: /board/modify - GET
@@ -107,7 +107,7 @@ public class BoardController {
 
         Board board = repository.findOne(boardNo);
 
-        ModelAndView mv = new ModelAndView("chap02/board-modify");
+        ModelAndView mv = new ModelAndView("board/board-modify");
         mv.addObject("b", board);
 
         return mv;
