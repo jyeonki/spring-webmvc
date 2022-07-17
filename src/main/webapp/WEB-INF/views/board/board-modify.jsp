@@ -20,42 +20,45 @@
             margin-bottom: 15px;
         }
 
-        a.list,
-        a.delete {
+        a.list-btn {
             border: 1px solid #000;
         }
     </style>
 </head>
 
 <body>
-    <div class="board-content">
-        <form action="/board/modify" method="POST">
-            <!--<h1>${b.boardNo}번 게시물</h1>-->
-            <input type="hidden" name="boardNo" value="${b.boardNo}">
-            
-            <label>
-                작성자
-                <br>
-                <input type="text" name="writer" value="${b.writer}">
-            </label>
-            <label>
-                글제목
-                <br>
-                <input type="text" name="title" value="${b.title}">
-            </label>
-            <label>
-                내용
-                <br>
-                <input type="text" name="content" value="${b.content}">
-            </label>
-            <label>
-                <button type="submit">수정</button>
-            </label>
-        </form>
+    <div class="main-content">
+        <div class="board-container">
+            <form action="/board/modify" method="POST">
+                <!--<h1>${b.boardNo}번 게시물</h1>-->
+                <input type="hidden" name="boardNo" value="${b.boardNo}">
+                
+                <label>
+                    작성자
+                    <br>
+                    <input type="text" name="writer" value="${b.writer}">
+                </label>
+                <label>
+                    글제목
+                    <br>
+                    <input type="text" name="title" value="${b.title}">
+                </label>
+                <label>
+                    내용
+                    <br>
+                    <input type="text" name="content" value="${b.content}">
+                </label>
+                <label>
+                    <button type="submit">수정완료</button>
+                </label>
+            </form>
+        </div>
 
-        <label>
-            <a class="list" href="/board/list">목록</a>
-        </label>
+        <div class="btn-container">
+            <label>
+                <a class="list-btn" href="/board/list">목록</a>
+            </label>
+        </div>
     </div>
 
     <script>

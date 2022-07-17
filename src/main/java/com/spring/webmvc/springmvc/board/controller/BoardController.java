@@ -118,6 +118,7 @@ public class BoardController {
     public String modify(Board board) {
 
         log.info("/board/modify POST!!");
+
         return repository.modify(board) ? "redirect:/board/content?boardNo=" + board.getBoardNo() : "redirect:/board/list"; // 삼항 연산자
     }
 }

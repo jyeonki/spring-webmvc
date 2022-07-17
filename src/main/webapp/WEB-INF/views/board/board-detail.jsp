@@ -29,33 +29,37 @@
 </head>
 
 <body>
-    <div class="board-content">
-        <label>
-            작성자
-            <br>
-            <input type="text" name="writer" value="${b.writer}" disabled>
-        </label>
-        <label>
-            글제목
-            <br>
-            <input type="text" name="title" value="${b.title}" disabled>
-        </label>
-        <label>
-            내용
-            <br>
-            <input type="text" name="content" value="${b.content}" disabled>
-        </label>
-        <label>
-            <a class="modify-btn" href="/board/modify?boardNo=${b.boardNo}">수정</a>
-        </label>
-        
-        <label>
-            <a class="delete-btn" href="/board/delete?boardNo=${b.boardNo}">삭제</a>
-        </label>
+    <div class="main-content">
+        <div class="board-container">
+            <label>
+                작성자
+                <br>
+                <input type="text" name="writer" value="${b.writer}" disabled>
+            </label>
+            <label>
+                글제목
+                <br>
+                <input type="text" name="title" value="${b.title}" disabled>
+            </label>
+            <label>
+                내용
+                <br>
+                <input type="text" name="content" value="${b.content}" disabled>
+            </label>
+        </div>
+        <div class="btn-container">
+            <label>
+                <a class="modify-btn" href="/board/modify?boardNo=${b.boardNo}">수정</a>
+            </label>
+            
+            <label>
+                <a class="delete-btn" href="/board/delete?boardNo=${b.boardNo}">삭제</a>
+            </label>
 
-        <label>
-            <a class="list-btn" href="/board/list">목록</a>
-        </label>
+            <label>
+                <a class="list-btn" href="/board/list">목록</a>
+            </label>
+        </div>
     </div>
 
     <script>
