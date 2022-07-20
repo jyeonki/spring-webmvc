@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace 속성에는 사용할 인터페이스의 풀 패키지 경로 + 인터페이스 이름 -->
+<mapper namespace="com.spring.webmvc.springmvc.chap02.repository.ScoreMapper">
+
+    <!-- 점수 저장 -->
+    <insert id="save">
+        INSERT INTO tbl_score
+        (stu_num, stu_name, kor, eng, math, total, average, grade)
+        VALUES (seq_tbl_score.nextval, #{name}, #{kor}, #{eng}, #{math}, #{total}, #{average}, #{grade})
+    </insert>
+
+    <!-- 단일 컬럼 조회 시에는 resultType 속성으로 데이터 타입을 명시 -->
+    <!-- 다중 컬럼 조회 시에는 resultMap 속성으로 데이터를 객체 처리 -->
+
+    <!-- resultMap 설정 : DB 컬럼과 자바클래스 필드명의 차이를 지정 -->
+    <!-- id 속성은 식별자를 자유롭게 지정, type 속성에는 도메인 클래스명 -->
+    <resultMap id="scoreMap" type="com.spring.webmvc.springmvc.chap02.domain.Score">
+
+        <!-- property 속성에는 자바 필드명, column 속성에는 DB 컬럼명 -->
+        <result property="stuNum" column="stu_num"/>
+        <result property="name" column="stu_name"/>
+
+    </resultMap>
+
+    <!-- 전체 점수 정보 조회 -->
+<!--    <select id="findAll" resultMap="productMap">-->
+<!--        SELECT * FROM tbl_score-->
+<!--        ORDER BY stu_num-->
+<!--    </select>-->
+
+    <!-- 동적 SQL 작성법  -->
+    <!-- 전체 점수 정보 조회 -->
+    <select id="findAll" parameterType="java.util.List" resultMap="scoreMap">
+        SELECT * FROM tbl_score
+        <trim prefix="ORDER BY ">
+            <if test="sort == 'num'">stu_num ASC</if>
+            <if test="sort == 'name'">stu_name DESC</if>
+            <if test="sort == 'average'">average DESC</if>
+        </trim>
+    </select>
+
+    <!-- 개별 점수 조회 -->
+    <select id="findOne" resultMap="scoreMap">
+        SELECT * FROM tbl_score
+        WHERE stu_num = #{stuNum}
+    </select>
+
+    <!-- 점수 정보 삭제 -->
+    <delete id="remove">
+        DELETE FROM tbl_score
+        WHERE stu_num = #{stuNum}
+    </delete>
+
+</mapper>
