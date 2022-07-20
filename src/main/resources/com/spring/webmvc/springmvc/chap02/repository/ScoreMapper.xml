@@ -27,10 +27,24 @@
     </resultMap>
 
     <!-- 전체 점수 정보 조회 -->
-<!--    <select id="findAll" resultMap="productMap">-->
-<!--        SELECT * FROM tbl_score-->
-<!--        ORDER BY stu_num-->
-<!--    </select>-->
+    <!--<select id="findAll" resultMap="productMap">
+        SELECT * FROM tbl_score
+        ORDER BY stu_num
+    </select>-->
+
+    <!--  동적 SQL 작성법  -->
+    <!--<select id="findAll" resultMap="scoreMap">
+        SELECT * FROM tbl_score
+        <if test="sort == 'num'">
+            ORDER BY stu_num
+        </if>
+        <if test="sort == 'name'">
+            ORDER BY stu_name
+        </if>
+        <if test="sort == 'average'">
+            ORDER BY average DESC
+        </if>
+    </select>-->
 
     <!-- 동적 SQL 작성법  -->
     <!-- 전체 점수 정보 조회 -->
